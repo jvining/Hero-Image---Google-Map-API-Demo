@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hero Image / Google Map API Demo</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<!-- Bootstrap CDN -->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700,900,800,600,500,200,100' rel='stylesheet'>
+	<style>
+	body {text-rendering:optimizeLegibility; background:#fbfbfb; padding-top:50px; font-family: 'Raleway', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';}
+	body > .container{margin-top:20px;}
+	h1,h2,h3,h4,h5{font-weight:300;}
+	[class*="col-"]{color:#666;}
+
+	.voffset  {margin-top: 2px;}   .voffset1 {margin-top: 5px;} 
+	.voffset2 {margin-top: 10px;}  .voffset3 {margin-top: 15px;} 
+	.voffset4 {margin-top: 30px;}  .voffset5 {margin-top: 40px;} 
+	.voffset6 {margin-top: 60px;}  .voffset7 {margin-top: 80px;} 
+	.voffset8 {margin-top: 100px;} .voffset9 {margin-top: 150px;} 
+
+	footer {margin: 50px 0;}
+
+	/* col-xs-* */
+	@media only screen and (min-width :320px){}
+	/* col-xs-* */                            
+	@media only screen and (min-width :480px){}
+	/* col-sm-* */                            
+	@media only screen and (min-width :768px){}
+	/* col-md-* */                            
+	@media only screen and (min-width :992px){}
+	/* col-lg-* */
+	@media only screen and (min-width :1200px){}
+
+	.hero-unit {
+		background-image: url('https://images.unsplash.com/photo-1441716844725-09cedc13a4e7?q=80&fm=jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center center;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-color: #EEEEEE;
+		height: 100vh!important;
+	}
+
+	.hero-unit h1{color:#fff;text-shadow:.025em .025em #333;font-size:60px;letter-spacing:-1px;line-height:1;margin-bottom:0;}
+	.hero-unit h2{font-size:25px;color:#fff;text-shadow:.025em .025em #333;}
+	/* Google Map */
+	#map-canvas{width:100%;height:300px;}
+	</style>
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><strong>Hero Image / Google Map API Demo</strong></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                 </ul>
+            </div>
+        </div>
+    </nav>
+
+	<div class="hero-unit">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 voffset9 text-center">
+					<h1>Hello, world!</h1>
+					<h2>This is a simple hero unit, a simple jumbotron-style component for calling extra 7 attention to featured content or information.</h2>
+					<p><a class="btn btn-primary btn-large">Learn more</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid" id="map-canvas">
+		<!-- Nothing To see here :) -->
+	</div>
+
+
+	<footer>
+		<div class="container">
+	    	<div class="row">
+	        	<div class="col-xs-12">
+					<hr/>
+	            	<p>Copyright © Hero Image / Google Map API Demo 2015</p>
+	        	</div>
+	    	</div>
+		</div>
+	</footer>
+
+<!-- JS -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>function initialize() { 
+    var myLatlng = new google.maps.LatLng(40.7127837,-74.00594130000002);
+    var mapOptions = {
+      zoom: 13,
+    scrollwheel: false,
+      center: myLatlng
+    };
+  
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  
+    var contentString = 
+        '<div id="content">'+
+        '<p><a href="http://reddit.com">'+
+        'Aviara Spa</a> <br>'+
+        '7100 Aviara Resort Drive, Carlsbad, CA 92011 <br>'+
+        '(760) 603-6902'+
+        '</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        maxWidth: 350
+    });
+  
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Aviara Spa'
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
+  }
+  
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</body>
+</html>
